@@ -1,11 +1,11 @@
 let options = {
-  width: 500,
+  width: 800,
   height: 500,
-  backgroundColor: "#eb4034",
+  backgroundColor: "white",
 };
 
-const drawBarChart = function (options) {
-  let chartBody = document.getElementById("#chart");
+const drawBarChart = function (data, options, element) {
+  let chartBody = document.getElementById(element);
   setSize("#chart", options.width, options.height);
   setBackgroundColor("#chart", options.backgroundColor);
 };
@@ -15,8 +15,12 @@ const setSize = function (element, width, height) {
   document.querySelector(element).style.height = (height.toString() + "px");
 };
 
-const setBackgroundColor = function(element, color){
-  document.querySelector(element).style.backgroundColor = "blue";
+const renderBar = function(){
+
 }
 
-drawBarChart(options);
+const setBackgroundColor = function(element, color){
+  document.querySelector(element).style.backgroundColor = color;
+}
+
+drawBarChart([1, 2, 3, 4, 5], options, "#chart");
