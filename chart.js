@@ -13,8 +13,9 @@ const drawBarChart = function (data, options, element) {
   let chartBody = document.getElementById(element);
   setSize("#chart", options.width, options.height);
   setBackgroundColor("#chart", options.backgroundColor);
-  renderBars(data, options.bars);
   generateYAxisLabels(data);
+
+  renderBars(data, options.bars);
 };
 
 const setSize = function (element, width, height) {
@@ -69,9 +70,14 @@ const setBarHeight = function (data) {
 };
 
 const generateYAxisLabels = function (data) {
-  let yAxisLabels = document.createElement("div");
+  let yAxisLabels = document.createElement("p");
+  let yAxisDividersContainer = document.createElement("div");
+  yAxisDividersContainer.id = "yAxisDividersContainer";
+  let chart = document.getElementById("chart");
   yAxisLabels.id = "yAxisLabels";
-  document.getElementById("chart").appendChild(yAxisLabels);
+  chart.appendChild(yAxisLabels);
+  chart.appendChild(yAxisDividersContainer);
+
   let largestElemet = data[0];
   for (let i = 0; i < data.length; i++) {
     if (largestElemet < data[i]) {
@@ -81,14 +87,21 @@ const generateYAxisLabels = function (data) {
   //Round to nearest multiple of 5 -- https://stackoverflow.com/questions/18953384/javascript-round-up-to-the-next-multiple-of-5
   largestElemet = Math.ceil(largestElemet / 5) * 5;
   for (let i = largestElemet; i >= 0; i -= 5) {
-    let yLabel = document.createElement("p");
-    // let yLabelData = Math.trunc(
-    //   (largestElemet / (data.length / largestElemet)) * i
-    // );
-
+    let yLabel = document.createElement("div");
     yLabel.append(i);
+    yLabel.className = "yAxisLabel";
     document.getElementById("yAxisLabels").appendChild(yLabel);
+
+    let yAxisDivider = document.createElement("div");
+    yAxisDivider.className = "yAxisDivider";
+    yAxisDividersContainer.append(yAxisDivider);
   }
+};
+
+const generateXAxisLabels = function (data) {
+  let xAxisLabels = document.createElement("div");
+  xAxisLabels.id = "xAxisLabels";
+  document.getElementById("chart").appendChild(xAxisLabels);
 };
 
 const setBackgroundColor = function (element, color) {
