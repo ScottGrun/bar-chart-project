@@ -57,7 +57,58 @@ const setBackgroundColor = function (element, color) {
   document.querySelector(element).style.backgroundColor = color;
 };
 
-drawBarChart([2, 12, 41, 24, 21, 3, 9, 5, 5, 15, 2], options, "#chart");
+drawBarChart(
+  [
+    2,
+    24,
+    21,
+    3,
+    9,
+    5,
+    5,
+    12,
+    41,
+    24,
+    21,
+    3,
+    9,
+    5,
+    5,
+    24,
+    21,
+    24,
+    21,
+    3,
+    9,
+    5,
+    5,
+    3,
+    9,
+    5,
+    5,
+    15,
+    2,
+    12,
+    41,
+    24,
+    21,
+    3,
+    9,
+    5,
+    5,
+    21,
+    12,
+    41,
+    24,
+    21,
+    3,
+    9,
+    5,
+    5,
+  ],
+  options,
+  "#chart"
+);
 
 //test zone
 //handle negative numbers
