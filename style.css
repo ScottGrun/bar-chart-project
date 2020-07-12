@@ -13,8 +13,7 @@ body {
 #chart {
   position: relative;
   display: block;
-  border: solid 2px black;
-  border-radius: 3px;
+  border: solid 1px black;
   display: flex;
   align-items: flex-end;
 }
@@ -22,6 +21,11 @@ body {
 .barElement {
   position: relative;
   font-size: 1em;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  flex-flow: column;
+  border-radius: 4px 4px 0 0;
 }
 
 p {
@@ -63,4 +67,10 @@ p {
   align-content: space-between;
   flex-wrap: wrap;
   height: 103%;
+}
+
+.xAxisLabel {
+  position: absolute;
+  bottom: -25px;
+  color: black;
 }

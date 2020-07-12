@@ -2,11 +2,34 @@ let options = {
   width: 800,
   height: 500,
   backgroundColor: "white",
+  labels: [
+    "January",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "aaaaaaaaa",
+    "Jul",
+    "Aug",
+    "Sept",
+    "Oct",
+    "Nov",
+    "Dec",
+  ],
   bars: {
     color: "blue",
     labelColor: "white",
     gap: "8",
+    labelPosition: "center",
   },
+};
+
+const checkXLabelReadAbility = function (barWidth, barToCheck) {
+  let xLabels = document.getElementsByClassName("xAxisLabel");
+  console.log(` ${barWidth} ?< ${getComputedStyle(xLabels[barToCheck]).width}`);
+  if (getComputedStyle(xLabels[barToCheck]).width > barWidth) {
+    xLabels[barToCheck].style.transform = " rotate(90deg)";
+  }
 };
 
 const drawBarChart = function (data, options, element) {
@@ -38,17 +61,18 @@ const renderBars = function (data, barOptions) {
     //Style Bar with User Options
     bar.style.backgroundColor = barOptions.color;
     bar.style.color = barOptions.labelColor;
+    bar.style.justifyContent = barOptions.labelPosition;
 
     //Create  & add data label to bar
     let barValue = document.createElement("p");
     barValue.append(data[i]);
     bar.append(barValue);
     barValue.style.textAlign = "center";
-
+    bar.append(generateXAxisLabels(options.labels, i, data));
     //Add bar to graph
     document.getElementById("chart").appendChild(bar);
+    checkXLabelReadAbility(barWidth, i);
   }
-
   //Determine bar height based on data value
   setBarHeight(data);
 };
@@ -98,10 +122,22 @@ const generateYAxisLabels = function (data) {
   }
 };
 
-const generateXAxisLabels = function (data) {
-  let xAxisLabels = document.createElement("div");
-  xAxisLabels.id = "xAxisLabels";
-  document.getElementById("chart").appendChild(xAxisLabels);
+const generateXAxisLabels = function (labels, barToLabel, data) {
+  let xAxisLabel = document.createElement("span");
+  xAxisLabel.className = "xAxisLabel";
+
+  if (
+    labels === undefined ||
+    labels.length === 0 ||
+    labels.length < data.length
+  ) {
+    console.log("Please make sure you provided correctly formatted labels.");
+    xAxisLabel.append(barToLabel);
+    return xAxisLabel;
+  } else {
+    xAxisLabel.append(labels[barToLabel]);
+    return xAxisLabel;
+  }
 };
 
 const setBackgroundColor = function (element, color) {
