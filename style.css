@@ -11,6 +11,7 @@ body {
 }
 
 #chart {
+  position: relative;
   display: block;
   border: solid 2px black;
   border-radius: 3px;
@@ -19,6 +20,22 @@ body {
   padding-top: 5px;
 }
 
+.barElement {
+  font-size: 1em;
+}
+
 p {
   margin: 0;
+  font-size: 0.75em;
+  font-weight: bold;
+}
+
+#yAxisLabels {
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  position: absolute;
+  left: -25px;
+  font-weight: 400 !important;
 }
